@@ -1,104 +1,96 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>Sign In with Auth0</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
-  <style>
-    body, html {
-      height: 100%;
-      background-color: #f9f9f9;
-    }
+<style>
+  body,
+  html {
+    height: 100%;
+    background-color: #f9f9f9;
+  }
 
-    .login-container {
-      position: relative;
-      height: 100%;
-    }
+  .login-container {
+    position: relative;
+    height: 100%;
+  }
 
-    .login-box {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      padding: 15px;
-      background-color: #fff;
-      box-shadow: 0px 5px 5px #ccc;
-      border-radius: 5px;
-      border-top: 1px solid #e9e9e9;
-    }
+  .login-box {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 15px;
+    background-color: #fff;
+    box-shadow: 0px 5px 5px #ccc;
+    border-radius: 5px;
+    border-top: 1px solid #e9e9e9;
+  }
 
-    .login-header {
-      text-align: center;
-    }
+  .login-header {
+    text-align: center;
+  }
 
-    .login-header img {
-      width: 75px;
-    }
+  .login-header img {
+    width: 75px;
+  }
 
-    #error-message {
-      display: none;
-      white-space: break-spaces;
-    }
-    #btn-login {
-    	background: #7D6CFF;
-/* shadow-button-default */
+  #error-message {
+    display: none;
+    white-space: break-spaces;
+  }
 
-box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.04), 0px 4px 6px rgba(0, 0, 0, 0.05);
-border-radius: 50px;
-    }
-  </style>
+  .box-sing {
+    width: 446px;
+    height: 470px;
+    background: #FFFFFF;
+    /* Light/border */
+
+    border: 1px solid #EBEEF7;
+    box-sizing: border-box;
+    /* x-large */
+
+    box-shadow: 0px 20px 25px rgba(0, 0, 0, 0.1), 0px 10px 10px rgba(0, 0, 0, 0.04);
+    border-radius: 16px;
+  }
+  .login-text {
+    width: 223.59px;
+  }
+  .active-tab {
+    border: 2px solid #7D6CFF;
+    opacity: 1;
+  }
+  .tab {
+    border: 2px solid #7D6CFF;
+  }
+</style>
+
 <body>
-  <div class="login-container">
-    <div class="col-xs-12 col-sm-4 col-sm-offset-4 login-box">
-      <div class="login-header">
-        <img src="https://cdn.auth0.com/styleguide/1.0.0/img/badge.svg"/>
-        <h3>Welcome jskhdskjdshjk</h3>
-        <h5>PLEASE LOG IN</h5>
+
+  <div class="container h-100">
+    <div class="d-flex justify-content-center align-items-center h-100">
+      <div class="d-flex box-sing flex-column">
+        <div class="d-flex justify-content-center align-items-center mt-5">
+          <object data="./kueski.svg" type="" height="32px" width="135.14px"></object>
+        </div>
+        <div class="d-flex justify-content-between mt-5">
+          <div class="login-text text-center">
+            Iniciar sesión
+            <hr class="active-tab " />
+          </div>
+          <div class="login-text text-center">
+            Crear cuenta
+            <hr class="tab" />
+          </div>
+        </div>
       </div>
-      <div id="error-message" class="alert alert-danger"></div>
-      <form onsubmit="return false;" method="post">
-        <div class="form-group">
-         <label for="name">Email</label>
-          <input
-            type="email"
-            class="form-control"
-            id="email"
-            placeholder="Enter your email">
-        </div>
-        <div class="form-group">
-          <label for="name">Password</label>
-          <input
-            type="password"
-            class="form-control"
-            id="password"
-            placeholder="Enter your password">
-        </div>
-        <div class="captcha-container form-group"></div>
-        <button
-          type="submit"
-          id="btn-login"
-          class="btn btn-primary btn-block">
-            Log In
-        </button>
-        <button
-          type="button"
-          id="btn-signup"
-          class="btn btn-default btn-block">
-            Sign Up
-        </button>
-        <hr>
-        <button
-          type="button"
-          id="btn-google"
-          class="btn btn-default btn-danger btn-block">
-            Log In with Google
-        </button>
-      </form>
     </div>
   </div>
-
   <!--[if IE 8]>
   <script src="//cdnjs.cloudflare.com/ajax/libs/ie8/0.2.5/ie8.js"></script>
   <![endif]-->
@@ -111,7 +103,7 @@ border-radius: 50px;
   <script src="https://cdn.auth0.com/js/auth0/9.18/auth0.min.js"></script>
   <script src="https://cdn.auth0.com/js/polyfills/1.0/object-assign.min.js"></script>
   <script>
-    window.addEventListener('load', function() {
+    window.addEventListener('load', function () {
 
       var config = JSON.parse(
         decodeURIComponent(escape(window.atob('@@config@@')))
@@ -120,7 +112,7 @@ border-radius: 50px;
       var leeway = config.internalOptions.leeway;
       if (leeway) {
         var convertedLeeway = parseInt(leeway);
-      
+
         if (!isNaN(convertedLeeway)) {
           config.internalOptions.leeway = convertedLeeway;
         }
@@ -154,7 +146,7 @@ border-radius: 50px;
           username: username,
           password: password,
           captcha: captcha.getValue()
-        }, function(err) {
+        }, function (err) {
           if (err) displayError(err);
           button.disabled = false;
         });
@@ -171,7 +163,7 @@ border-radius: 50px;
           email: email,
           password: password,
           captcha: captcha.getValue()
-        }, function(err) {
+        }, function (err) {
           if (err) displayError(err);
           button.disabled = false;
         });
@@ -180,7 +172,7 @@ border-radius: 50px;
       function loginWithGoogle() {
         webAuth.authorize({
           connection: 'google-oauth2'
-        }, function(err) {
+        }, function (err) {
           if (err) displayError(err);
         });
       }
@@ -198,4 +190,5 @@ border-radius: 50px;
     });
   </script>
 </body>
+
 </html>
