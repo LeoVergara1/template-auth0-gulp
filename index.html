@@ -21,6 +21,81 @@
     height: 100%;
   }
 
+  .textColorGene{
+    color: #656B7C
+  }
+  .colorGen{
+    color: #18223D
+  }
+
+  .border-label {
+    border-radius: 16px;
+    width: 366px;
+    height: 50px !important;
+    top: 280px;
+    left: 573px;
+    border-color: #ced4da;
+  }
+  .border-label:hover {
+    border-radius: 16px;
+    width: 366px;
+    height: 50px !important;
+    top: 280px;
+    left: 573px;
+    border-color: #7D6CFF;
+  }
+
+  .text-terminos {
+    width: 366px;
+    height: 32px;
+    left: 573px;
+    top: 494px;
+    /* Labels & Body/label-01 */
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    /* or 133% */
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.02em;
+    color: #888EA0;
+  }
+
+  .color-text {
+    color: #7D6CFF;
+  }
+
+  .color-text-link {
+    color: #888EA0;
+  }
+
+  .color-label {
+    color: #B4BACA;
+    top: -4px !important;
+  }
+
+  .button-login {
+    background: #7D6CFF;
+    /* shadow-button-default */
+    box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.04), 0px 4px 6px rgba(0, 0, 0, 0.05);
+    border-radius: 50px;
+    height: 54px;
+    color: #fff;
+    width: 366px;
+  }
+
+  .button-login:hover {
+    background: #7D6CFF;
+    /* shadow-button-default */
+    box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.04), 0px 4px 6px rgba(0, 0, 0, 0.05);
+    border-radius: 50px;
+    color: #fff;
+    height: 54px;
+    width: 366px;
+  }
+
   .login-box {
     position: absolute;
     top: 50%;
@@ -71,6 +146,10 @@
   .tab {
     border: 2px solid #7D6CFF;
   }
+
+  .cursor-pointer {
+    cursor: pointer;
+  }
 </style>
 
 <body>
@@ -113,14 +192,43 @@
           </svg>
         </div>
         <div class="d-flex justify-content-between mt-5">
-          <div class="login-text text-center">
+          <div id="textColorLogin" class="textColorGene login-text text-center cursor-pointer" onclick="hiddenCreateUser()">
             Iniciar sesión
-            <hr class="active-tab " />
+            <hr class="active-tab" id="tab-login" />
           </div>
-          <div class="login-text text-center">
+          <div id="textColorCreate" class="textColorGene login-text text-center cursor-pointer" onclick="hiddenLoginUser()">
             Crear cuenta
-            <hr class="tab" />
+            <hr class="tab" id="tab-create" />
           </div>
+        </div>
+        <div id="userLogin" class="d-flex flex-column align-items-center ">
+          <div class="form-floating mb-3">
+            <input type="email" class="form-control border-label" id="floatingInput" placeholder="usuario@ejemplo.com">
+            <label for="floatingInput" class="color-label">usuario@ejemplo.com</label>
+          </div>
+          <div class="form-floating">
+            <input type="password" class="form-control border-label" id="floatingPassword" placeholder="Password">
+            <label for="floatingPassword" class="color-label">Tu contraseña</label>
+          </div>
+          <spam href="#" class="cursor-pointer d-flex justify-content-center p-3 color-text-link">¿No recuerdas tu
+            contraseña?</spam>
+          <button type="button" class="btn button-login">Iniciar sesión</button>
+        </div>
+
+        <div id="userCreate" class="d-flex flex-column align-items-center visually-hidden">
+          <div class="form-floating mb-3">
+            <input type="email" class="form-control border-label" id="floatingInput1" placeholder="usuario@ejemplo.com">
+            <label for="floatingInput1" class="color-label">usuario@ejemplo.com</label>
+          </div>
+          <div class="form-floating">
+            <input type="password" class="form-control border-label" id="floatingPassword1" placeholder="Password">
+            <label for="floatingPassword1" class="color-label">Tu contraseña</label>
+          </div>
+          <button type="button" class="btn button-login m-3">Crear cuenta</button>
+          <spam class="text-terminos">Al crear tu cuenta estarás aceptando los <spam href="#"
+              class="color-text cursor-pointer">Términos</spam> y el <spam href="#"
+              class="color-text cursor-pointer">aviso de privacidad
+            </spam> de Kueski.</spam>
         </div>
       </div>
     </div>
@@ -137,6 +245,45 @@
   <script src="https://cdn.auth0.com/js/auth0/9.18/auth0.min.js"></script>
   <script src="https://cdn.auth0.com/js/polyfills/1.0/object-assign.min.js"></script>
   <script>
+    function hiddenCreateUser() {
+      console.log('Se oculto el crear usuario')
+      const divUserCreate = document.getElementById('userCreate');
+      divUserCreate.classList.add("visually-hidden")
+      const divUserLogin = document.getElementById('userLogin')
+      divUserLogin.classList.remove("visually-hidden")
+      const tabLogin = document.getElementById('tab-login')
+      tabLogin.classList.add("active-tab")
+      tabLogin.classList.remove("tab")
+      const tabCreate = document.getElementById('tab-create')
+      tabCreate.classList.remove("active-tab")
+      tabCreate.classList.add("tab")
+      const textColorLogin = document.getElementById('textColorLogin')
+      textColorLogin.classList.add("colorGen")
+      textColorLogin.classList.remove("textColorGene")
+      const textColorCreate = document.getElementById('textColorCreate')
+      textColorCreate.classList.remove("colorGen")
+      textColorCreate.classList.add("textColorGene")
+    }
+    function hiddenLoginUser() {
+      console.log('Se oculto el login')
+      const divUserLogin = document.getElementById('userLogin');
+      divUserLogin.classList.add("visually-hidden")
+      const divUserCreate = document.getElementById('userCreate')
+      divUserCreate.classList.remove("visually-hidden")
+      const tabLogin = document.getElementById('tab-login')
+      tabLogin.classList.remove("active-tab")
+      tabLogin.classList.add("tab")
+      const tabCreate = document.getElementById('tab-create')
+      tabCreate.classList.add("active-tab")
+      tabCreate.classList.remove("tab")
+      const textColorLogin = document.getElementById('textColorLogin')
+      textColorLogin.classList.remove("colorGen")
+      textColorLogin.classList.add("textColorGene")
+      const textColorCreate = document.getElementById('textColorCreate')
+      textColorCreate.classList.add("colorGen")
+      textColorCreate.classList.remove("textColorGene")
+    }
+
     window.addEventListener('load', function () {
 
       var config = JSON.parse(
