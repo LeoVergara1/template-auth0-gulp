@@ -171,10 +171,11 @@
   outline: none;
 }
 input[type="text"]:focus {
-  border-color: #7D6CFF;
+  border: 2px solid #7D6CFF;
 }
 input[type="text"]:focus + label[placeholder]:before {
   color: #7D6CFF;
+  opacity: 1;
 }
 input[type="text"]:focus + label[placeholder]:before,
 input[type="text"]:valid + label[placeholder]:before {
@@ -204,6 +205,7 @@ input[type="text"] + label[placeholder]:before {
   margin: 0 calc(0.5em + 2px);
   padding: 0 2px;
   color: #7d7d7d;
+  opacity: 0.5;
   white-space: nowrap;
   transition: 0.3s ease-in-out;
   background-image: linear-gradient(to bottom, #ffffff, #ffffff);
