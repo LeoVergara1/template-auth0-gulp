@@ -159,7 +159,7 @@
     cursor: pointer;
   }
 
-  input[type="text"] {
+  input {
   box-sizing: border-box;
   height: calc(3em + 2px);
   margin: 0 0 1em;
@@ -170,36 +170,36 @@
   resize: none;
   outline: none;
 }
-input[type="text"]:focus {
+input:focus {
   border: 2px solid #7D6CFF;
 }
-input[type="text"]:focus + label[placeholder]:before {
+input:focus + label[placeholder]:before {
   color: #7D6CFF;
   opacity: 1;
 }
-input[type="text"]:focus + label[placeholder]:before,
-input[type="text"]:valid + label[placeholder]:before {
+input:focus + label[placeholder]:before,
+input:valid + label[placeholder]:before {
   transition-duration: .2s;
   transform: translate(0, -1.6em) scale(0.9, 0.9);	
 	font-weight: bold;
 }
-input[type="text"]:valid {
+input:valid {
 	border-color: #7D6CFF;
 }
-input[type="text"]:valid + label[placeholder]:before {
+input:valid + label[placeholder]:before {
 	color: #7D6CFF;
 }
-input[type="text"]:invalid + label[placeholder][alt]:before {
+input:invalid + label[placeholder][alt]:before {
   content: attr(alt);
 }
-input[type="text"] + label[placeholder] {
+input + label[placeholder] {
   display: block;	
   pointer-events: none;
   line-height: 1.25em;
   margin-top: calc(-3em - 2px);
   margin-bottom: calc((3em - 1em) + 2px);
 }
-input[type="text"] + label[placeholder]:before {
+input + label[placeholder]:before {
   content: attr(placeholder);
   display: inline-block;
   margin: 0 calc(0.5em + 2px);
@@ -217,7 +217,7 @@ input[type="text"] + label[placeholder]:before {
 
 <body>
 
-  <div class="container h-100">
+  <div class="container h-100 login-container">
     <div class="d-flex justify-content-center align-items-center h-100">
       <div class="d-flex box-sing flex-column">
         <div class="d-flex justify-content-center align-items-center mt-5">
@@ -254,6 +254,7 @@ input[type="text"] + label[placeholder]:before {
               fill="#18223D" />
           </svg>
         </div>
+
         <div class="d-flex justify-content-between mt-5">
           <div id="textColorLogin" class="textColorGene2 login-text text-center cursor-pointer" onclick="hiddenCreateUser()">
             Iniciar sesión
@@ -264,36 +265,37 @@ input[type="text"] + label[placeholder]:before {
             <hr class="tab" id="tab-create" />
           </div>
         </div>
-        <div id="userLogin" class="d-flex flex-column align-items-center ">
+        <form id="userLogin" class="d-flex flex-column align-items-center" onsubmit="return false;" method="post">
           <div class="">
-            <input  class="border-label" type="text" required name="email" />
+            <input  class="border-label" type="email" required name="email" id="email" />
             <label for="input" alt="Correo" placeholder="usuario@ejemplo.com"></label>
           </div>
           <div class="">
-            <input type="text" class="border-label" required name="password">
+            <input  class="border-label" required name="password" type="password" id="password" >
             <label for="inputPassword" alt="Tu contraseña" placeholder="Tu contraseña"></label>
           </div>
           <spam href="#" class="cursor-pointer d-flex justify-content-center p-3 color-text-link">¿No recuerdas tu
             contraseña?</spam>
-          <button type="button" class="btn button-login">Iniciar sesión</button>
+          <div class="captcha-container form-group"></div>
+          <button type="button" class="btn button-login" id="btn-login">Iniciar sesión</button>
           <br>
-        </div>
+        </form>
 
-        <div id="userCreate" class="d-flex flex-column align-items-center visually-hidden">
+        <form id="userCreate" class="d-flex flex-column align-items-center visually-hidden" onsubmit="return false;" method="post">
           <div class="">
-            <input type="text" class="border-label" required name="email" />
+            <input type="text" class="border-label" required name="email" id="email_signup"/>
             <label for="floatingInput" alt="Correo" placeholder="usuario@ejemplo.com"></label>
           </div>
           <div class="">
-            <input type="text" class="border-label" required name="password" />
+            <input type="text" class="border-label" required name="password" id="password_signup"/>
             <label for="inputPassword" alt="Tu contraseña" placeholder="Tu contraseña"></label>
           </div>
-          <button type="button" class="btn button-login m-3">Crear cuenta</button>
+          <button type="button" class="btn button-login m-3" id="btn-signup">Crear cuenta</button>
           <spam class="text-terminos">Al crear tu cuenta estarás aceptando los <spam href="#"
               class="color-text cursor-pointer">Términos</spam> y el <spam href="#"
               class="color-text cursor-pointer">aviso de privacidad
             </spam> de Kueski.</spam>
-        </div>
+        </form>
       </div>
     </div>
   </div>
@@ -399,8 +401,8 @@ input[type="text"] + label[placeholder]:before {
 
       function signup() {
         var button = this;
-        var email = document.getElementById('email').value;
-        var password = document.getElementById('password').value;
+        var email = document.getElementById('email_signup').value;
+        var password = document.getElementById('password_signup').value;
 
         button.disabled = true;
         webAuth.redirect.signupAndLogin({
@@ -430,7 +432,6 @@ input[type="text"] + label[placeholder]:before {
       }
 
       document.getElementById('btn-login').addEventListener('click', login);
-      document.getElementById('btn-google').addEventListener('click', loginWithGoogle);
       document.getElementById('btn-signup').addEventListener('click', signup);
     });
   </script>
