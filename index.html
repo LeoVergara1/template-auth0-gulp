@@ -265,13 +265,13 @@ input[type="text"] + label[placeholder]:before {
           </div>
         </div>
         <div id="userLogin" class="d-flex flex-column align-items-center ">
-          <div class="mb-3">
+          <div class="">
             <input  class="border-label" type="text" required name="email" />
             <label for="input" alt="Correo" placeholder="usuario@ejemplo.com"></label>
           </div>
-          <div class="form-floating">
-            <input type="password" class="form-control border-label" id="floatingPassword" placeholder="Password">
-            <label for="floatingPassword" class="color-label">Tu contraseña</label>
+          <div class="">
+            <input type="text" class="border-label" required name="password">
+            <label for="inputPassword" alt="Tu contraseña" placeholder="Tu contraseña"></label>
           </div>
           <spam href="#" class="cursor-pointer d-flex justify-content-center p-3 color-text-link">¿No recuerdas tu
             contraseña?</spam>
@@ -280,13 +280,13 @@ input[type="text"] + label[placeholder]:before {
         </div>
 
         <div id="userCreate" class="d-flex flex-column align-items-center visually-hidden">
-          <div class="form-floating mb-3">
-            <input type="email" class="form-control border-label" id="floatingInput1" placeholder="usuario@ejemplo.com">
-            <label for="floatingInput1" class="color-label">usuario@ejemplo.com</label>
+          <div class="">
+            <input type="text" class="border-label" required name="email" />
+            <label for="floatingInput" alt="Correo" placeholder="usuario@ejemplo.com"></label>
           </div>
-          <div class="form-floating">
-            <input type="password" class="form-control border-label" id="floatingPassword1" placeholder="Password">
-            <label for="floatingPassword1" class="color-label">Tu contraseña</label>
+          <div class="">
+            <input type="text" class="border-label" required name="password" />
+            <label for="inputPassword" alt="Tu contraseña" placeholder="Tu contraseña"></label>
           </div>
           <button type="button" class="btn button-login m-3">Crear cuenta</button>
           <spam class="text-terminos">Al crear tu cuenta estarás aceptando los <spam href="#"
