@@ -92,6 +92,8 @@
     height: 54px;
     color: #fff;
     width: 366px;
+    font-size: 16px;
+    text-transform: none;
   }
 
   .button-login:hover {
@@ -130,7 +132,7 @@
 
   .box-sing {
     width: 446px;
-    height: 470px;
+    height: 486px;
     background: #FFFFFF;
     /* Light/border */
 
@@ -274,7 +276,7 @@ input + label[placeholder]:before {
             <hr class="tab" id="tab-create" />
           </div>
         </div>
-        <form id="userLogin" class="d-flex flex-column align-items-center" onsubmit="return false;" method="post">
+        <form id="userLogin" class="d-flex flex-column align-items-center mt-3" onsubmit="return false;" method="post">
           <div class="">
             <input  class="border-label" type="email" required name="email" id="email" placeholder=" "/>
             <label for="input" alt="Correo" placeholder="Correo"></label>
@@ -290,7 +292,7 @@ input + label[placeholder]:before {
           <br>
         </form>
 
-        <form id="userCreate" class="d-flex flex-column align-items-center visually-hidden" onsubmit="return false;" method="post">
+        <form id="userCreate" class="d-flex flex-column align-items-center visually-hidden mt-3" onsubmit="return false;" method="post">
           <div class="">
             <input type="email" class="border-label" required name="email" id="email_signup" placeholder=" "/>
             <label for="floatingInput" alt="Correo" placeholder="Correo"></label>
