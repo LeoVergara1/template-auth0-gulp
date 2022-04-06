@@ -184,6 +184,14 @@ input:valid + label[placeholder]:before {
 	font-weight: bold;
   opacity: 1;
 }
+
+input:not(:placeholder-shown) + label[placeholder]:before {
+  transition-duration: .2s;
+  transform: translate(0, -1.6em) scale(0.9, 0.9);	
+	font-weight: bold;
+  opacity: 1;
+}
+
 input:valid {
 	border-color: #7D6CFF;
 }
@@ -268,11 +276,11 @@ input + label[placeholder]:before {
         </div>
         <form id="userLogin" class="d-flex flex-column align-items-center" onsubmit="return false;" method="post">
           <div class="">
-            <input  class="border-label" type="email" required name="email" id="email" />
-            <label for="input" alt="Correo" placeholder="usuario@ejemplo.com"></label>
+            <input  class="border-label" type="email" required name="email" id="email" placeholder=" "/>
+            <label for="input" alt="Correo" placeholder="Correo"></label>
           </div>
           <div class="">
-            <input  class="border-label" required name="password" type="password" id="password" >
+            <input  class="border-label" required name="password" type="password" id="password" placeholder=" " >
             <label for="inputPassword" alt="Tu contraseña" placeholder="Tu contraseña"></label>
           </div>
           <spam href="#" class="cursor-pointer d-flex justify-content-center p-3 color-text-link">¿No recuerdas tu
@@ -284,11 +292,11 @@ input + label[placeholder]:before {
 
         <form id="userCreate" class="d-flex flex-column align-items-center visually-hidden" onsubmit="return false;" method="post">
           <div class="">
-            <input type="text" class="border-label" required name="email" id="email_signup"/>
-            <label for="floatingInput" alt="Correo" placeholder="usuario@ejemplo.com"></label>
+            <input type="email" class="border-label" required name="email" id="email_signup" placeholder=" "/>
+            <label for="floatingInput" alt="Correo" placeholder="Correo"></label>
           </div>
           <div class="">
-            <input type="text" class="border-label" required name="password" id="password_signup"/>
+            <input type="text" class="border-label" required name="password" id="password_signup" placeholder=" "/>
             <label for="inputPassword" alt="Tu contraseña" placeholder="Tu contraseña"></label>
           </div>
           <button type="button" class="btn button-login m-3" id="btn-signup">Crear cuenta</button>
