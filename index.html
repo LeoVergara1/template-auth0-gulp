@@ -103,7 +103,6 @@
     border-radius: 50px;
     color: #fff;
     height: 54px;
-    width: 366px;
   }
 
   .login-box {
@@ -130,6 +129,10 @@
     white-space: break-spaces;
   }
 
+  #error-message-signup {
+    display: none;
+    white-space: break-spaces;
+  }
   .box-sing {
     width: 446px;
     height: auto;
@@ -348,9 +351,10 @@ input + label[placeholder]:before {
             <label for="floatingInput" alt="Correo" placeholder="Correo"></label>
           </div>
           <div class="">
-            <input type="text" class="border-label" required name="password" id="password_signup" placeholder=" "/>
+            <input type="password" class="border-label" required name="password" id="password_signup" placeholder=" "/>
             <label for="inputPassword" alt="Tu contraseña" placeholder="Tu contraseña"></label>
           </div>
+        <div id="error-message-signup" class="justify-content-center align-items-center d-flex"></div>
           <button type="button" class="btn button-login m-3" id="btn-signup">Crear cuenta</button>
           <spam class="text-terminos">Al crear tu cuenta estarás aceptando los <spam href="#"
               class="color-text cursor-pointer">Términos</spam> y el <spam href="#"
@@ -411,9 +415,14 @@ input + label[placeholder]:before {
       const textColorCreate = document.getElementById('textColorCreate')
       textColorCreate.classList.remove("textColorGene2")
       textColorCreate.classList.add("textColorGene")
+      const divErrors = document.getElementById('error-message')
+      divErrors.classList.remove("visually-hidden")
     }
     function hiddenLoginUser() {
-      console.log('Se oculto el login')
+      const divErrors = document.getElementById('error-message')
+      divErrors.classList.add("visually-hidden")
+      const divErrorsSign = document.getElementById('error-message-signup')
+      divErrorsSign.classList.remove("visually-hidden")
       const divUserLogin = document.getElementById('userLogin');
       divUserLogin.classList.add("visually-hidden")
       const divUserCreate = document.getElementById('userCreate')
@@ -433,36 +442,237 @@ input + label[placeholder]:before {
     }
 
     window.addEventListener('load', function () {
-
-      var config = JSON.parse(
-        decodeURIComponent(escape(window.atob('@@config@@')))
-      );
-
-      var leeway = config.internalOptions.leeway;
-      if (leeway) {
-        var convertedLeeway = parseInt(leeway);
-
-        if (!isNaN(convertedLeeway)) {
-          config.internalOptions.leeway = convertedLeeway;
-        }
-      }
-
-      var params = Object.assign({
-        overrides: {
-          __tenant: config.auth0Tenant,
-          __token_issuer: config.authorizationServer.issuer
+      const mockErro = {
+    "original": {
+        "original": null,
+        "response": {
+            "req": {
+                "method": "POST",
+                "url": "https://kueski-development.us.auth0.com/dbconnections/signup",
+                "data": {
+                    "client_id": "RQusc7kYBHy5xthHAmwX8ugkfnPN8rlm",
+                    "state": "hKFo2SBodkNGanhoOFJzeFh3SGd2blJseEhHTXo5Z091OUQ3T6FupWxvZ2luo3RpZNkgR2cxWXFOSm1lb0xFM1JHSzNnMmZqcnd4SmJQNFVqVnGjY2lk2SBSUXVzYzdrWUJIeTV4dGhIQW13WDh1Z2tmblBOOHJsbQ",
+                    "connection": "Username-Password-Authentication",
+                    "email": "leovergara.dark@gmail.com",
+                    "password": "*****"
+                },
+                "headers": {
+                    "content-type": "application/json",
+                    "auth0-client": "eyJuYW1lIjoiYXV0aDAuanMiLCJ2ZXJzaW9uIjoiOS4xOC4xIn0="
+                }
+            },
+            "xhr": {},
+            "text": "{\"name\":\"PasswordStrengthError\",\"message\":\"Password is too weak\",\"code\":\"invalid_password\",\"description\":{\"rules\":[{\"message\":\"At least %d characters in length\",\"format\":[8],\"code\":\"lengthAtLeast\",\"verified\":false},{\"message\":\"Contain at least %d of the following %d types of characters:\",\"code\":\"containsAtLeast\",\"format\":[3,4],\"items\":[{\"message\":\"lower case letters (a-z)\",\"code\":\"lowerCase\",\"verified\":false},{\"message\":\"upper case letters (A-Z)\",\"code\":\"upperCase\",\"verified\":false},{\"message\":\"numbers (i.e. 0-9)\",\"code\":\"numbers\",\"verified\":true},{\"message\":\"special characters (e.g. !@#$%^&*)\",\"code\":\"specialCharacters\",\"verified\":false}],\"verified\":false}],\"verified\":false},\"policy\":\"* At least 8 characters in length\\n* Contain at least 3 of the following 4 types of characters:\\n * lower case letters (a-z)\\n * upper case letters (A-Z)\\n * numbers (i.e. 0-9)\\n * special characters (e.g. !@#$%^&*)\",\"statusCode\":400}",
+            "statusText": "",
+            "statusCode": 400,
+            "status": 400,
+            "statusType": 4,
+            "info": false,
+            "ok": false,
+            "redirect": false,
+            "clientError": true,
+            "serverError": false,
+            "error": {
+                "status": 400,
+                "method": "POST",
+                "url": "https://kueski-development.us.auth0.com/dbconnections/signup"
+            },
+            "created": false,
+            "accepted": false,
+            "noContent": false,
+            "badRequest": true,
+            "unauthorized": false,
+            "notAcceptable": false,
+            "forbidden": false,
+            "notFound": false,
+            "unprocessableEntity": false,
+            "headers": {
+                "access-control-allow-credentials": "false",
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset",
+                "alt-svc": "h3=\":443\"; ma=86400, h3-29=\":443\"; ma=86400",
+                "cache-control": "private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0, no-transform",
+                "cf-cache-status": "DYNAMIC",
+                "cf-ray": "6f85795d9ba99a47-MEX",
+                "content-length": "929",
+                "content-type": "application/json; charset=utf-8",
+                "date": "Thu, 07 Apr 2022 20:22:13 GMT",
+                "etag": "W/\"3a1-2wJadQ6wZv3grXvf3gGDrtBhGbQ\"",
+                "expect-ct": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+                "ot-baggage-auth0-request-id": "6f85795d9ba99a47",
+                "ot-tracer-sampled": "true",
+                "ot-tracer-spanid": "0fb0b5da7a3dce82",
+                "ot-tracer-traceid": "284dfd97352704f3",
+                "server": "cloudflare",
+                "strict-transport-security": "max-age=31536000",
+                "vary": "Origin, Accept-Encoding",
+                "x-auth0-requestid": "987dcfd2073e17c2b696",
+                "x-content-type-options": "nosniff",
+                "x-ratelimit-limit": "50",
+                "x-ratelimit-remaining": "49",
+                "x-ratelimit-reset": "1649362935"
+            },
+            "header": {
+                "access-control-allow-credentials": "false",
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset",
+                "alt-svc": "h3=\":443\"; ma=86400, h3-29=\":443\"; ma=86400",
+                "cache-control": "private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0, no-transform",
+                "cf-cache-status": "DYNAMIC",
+                "cf-ray": "6f85795d9ba99a47-MEX",
+                "content-length": "929",
+                "content-type": "application/json; charset=utf-8",
+                "date": "Thu, 07 Apr 2022 20:22:13 GMT",
+                "etag": "W/\"3a1-2wJadQ6wZv3grXvf3gGDrtBhGbQ\"",
+                "expect-ct": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+                "ot-baggage-auth0-request-id": "6f85795d9ba99a47",
+                "ot-tracer-sampled": "true",
+                "ot-tracer-spanid": "0fb0b5da7a3dce82",
+                "ot-tracer-traceid": "284dfd97352704f3",
+                "server": "cloudflare",
+                "strict-transport-security": "max-age=31536000",
+                "vary": "Origin, Accept-Encoding",
+                "x-auth0-requestid": "987dcfd2073e17c2b696",
+                "x-content-type-options": "nosniff",
+                "x-ratelimit-limit": "50",
+                "x-ratelimit-remaining": "49",
+                "x-ratelimit-reset": "1649362935"
+            },
+            "type": "application/json",
+            "charset": "utf-8",
+            "links": {},
+            "body": {
+                "name": "PasswordStrengthError",
+                "message": "Password is too weak",
+                "code": "invalid_password",
+                "description": {
+                    "rules": [
+                        {
+                            "message": "At least %d characters in length",
+                            "format": [
+                                8
+                            ],
+                            "code": "lengthAtLeast",
+                            "verified": false
+                        },
+                        {
+                            "message": "Contain at least %d of the following %d types of characters:",
+                            "code": "containsAtLeast",
+                            "format": [
+                                3,
+                                4
+                            ],
+                            "items": [
+                                {
+                                    "message": "lower case letters (a-z)",
+                                    "code": "lowerCase",
+                                    "verified": false
+                                },
+                                {
+                                    "message": "upper case letters (A-Z)",
+                                    "code": "upperCase",
+                                    "verified": false
+                                },
+                                {
+                                    "message": "numbers (i.e. 0-9)",
+                                    "code": "numbers",
+                                    "verified": true
+                                },
+                                {
+                                    "message": "special characters (e.g. !@#$%^&*)",
+                                    "code": "specialCharacters",
+                                    "verified": false
+                                }
+                            ],
+                            "verified": false
+                        }
+                    ],
+                    "verified": false
+                },
+                "policy": "* At least 8 characters in length\n* Contain at least 3 of the following 4 types of characters:\n * lower case letters (a-z)\n * upper case letters (A-Z)\n * numbers (i.e. 0-9)\n * special characters (e.g. !@#$%^&*)",
+                "statusCode": 400
+            }
         },
-        domain: config.auth0Domain,
-        clientID: config.clientID,
-        redirectUri: config.callbackURL,
-        responseType: 'code'
-      }, config.internalOptions);
+        "status": 400
+    },
+    "statusCode": 400,
+    "code": "invalid_password",
+    "description": {
+        "rules": [
+            {
+                "message": "At least %d characters in length",
+                "format": [
+                    8
+                ],
+                "code": "lengthAtLeast",
+                "verified": false
+            },
+            {
+                "message": "Contain at least %d of the following %d types of characters:",
+                "code": "containsAtLeast",
+                "format": [
+                    3,
+                    4
+                ],
+                "items": [
+                    {
+                        "message": "lower case letters (a-z)",
+                        "code": "lowerCase",
+                        "verified": false
+                    },
+                    {
+                        "message": "upper case letters (A-Z)",
+                        "code": "upperCase",
+                        "verified": false
+                    },
+                    {
+                        "message": "numbers (i.e. 0-9)",
+                        "code": "numbers",
+                        "verified": true
+                    },
+                    {
+                        "message": "special characters (e.g. !@#$%^&*)",
+                        "code": "specialCharacters",
+                        "verified": false
+                    }
+                ],
+                "verified": false
+            }
+        ],
+        "verified": false
+    },
+    "name": "PasswordStrengthError",
+    "policy": "* At least 8 characters in length\n* Contain at least 3 of the following 4 types of characters:\n * lower case letters (a-z)\n * upper case letters (A-Z)\n * numbers (i.e. 0-9)\n * special characters (e.g. !@#$%^&*)"
+}
+      //var config = JSON.parse(
+      //  decodeURIComponent(escape(window.atob('@@config@@')))
+      //);
 
-      var webAuth = new auth0.WebAuth(params);
-      var databaseConnection = 'Username-Password-Authentication';
-      var captcha = webAuth.renderCaptcha(
-        document.querySelector('.captcha-container')
-      );
+      //var leeway = config.internalOptions.leeway;
+      //if (leeway) {
+      //  var convertedLeeway = parseInt(leeway);
+
+      //  if (!isNaN(convertedLeeway)) {
+      //    config.internalOptions.leeway = convertedLeeway;
+      //  }
+      //}
+
+      //var params = Object.assign({
+      //  overrides: {
+      //    __tenant: config.auth0Tenant,
+      //    __token_issuer: config.authorizationServer.issuer
+      //  },
+      //  domain: config.auth0Domain,
+      //  clientID: config.clientID,
+      //  redirectUri: config.callbackURL,
+      //  responseType: 'code'
+      //}, config.internalOptions);
+
+      //var webAuth = new auth0.WebAuth(params);
+      //var databaseConnection = 'Username-Password-Authentication';
+      //var captcha = webAuth.renderCaptcha(
+      //  document.querySelector('.captcha-container')
+      //);
 
       function login(e) {
         e.preventDefault();
@@ -476,7 +686,7 @@ input + label[placeholder]:before {
           password: password,
           captcha: captcha.getValue()
         }, function (err) {
-          if (err) displayError(err);
+          if (err) displayError(err, 'error-message');
           button.disabled = false;
         });
       }
@@ -485,7 +695,7 @@ input + label[placeholder]:before {
         var button = this;
         var email = document.getElementById('email_signup').value;
         var password = document.getElementById('password_signup').value;
-
+        displayError(mockErro, 'error-message-signup');
         button.disabled = true;
         webAuth.redirect.signupAndLogin({
           connection: databaseConnection,
@@ -493,7 +703,7 @@ input + label[placeholder]:before {
           password: password,
           captcha: captcha.getValue()
         }, function (err) {
-          if (err) displayError(err);
+          if (err) displayError(err, 'error-message-signup');
           button.disabled = false;
         });
       }
@@ -502,13 +712,15 @@ input + label[placeholder]:before {
         webAuth.authorize({
           connection: 'google-oauth2'
         }, function (err) {
-          if (err) displayError(err);
+          if (err) displayError(err, 'error-message');
         });
       }
 
-      function displayError(err) {
-        captcha.reload();
-        var errorMessage = document.getElementById('error-message');
+      function displayError(err, idElement) {
+        console.log(err);
+        //captcha.reload();
+        var errorMessage = document.getElementById(idElement);
+        console.log(err);
         errorMessage.innerHTML = err.policy || err.description;
         errorMessage.classList.add('d-flex');
       }
