@@ -26,11 +26,11 @@
     min-height: 500px;
   }
 
-  .text-create-user {
+  .textColorGene {
     color: #656B7C
   }
 
-  .text-login-user {
+  .textColorGene2 {
     color: #18223D;
     font-weight: bold;
   }
@@ -173,7 +173,7 @@
     background: #E5E2FF;
   }
 
-  .text-header {
+  .textRenovationHeader {
     position: absolute;
     width: 330px;
     height: 18px;
@@ -191,7 +191,7 @@
     color: #18223D;
   }
 
-  .text-subtitle {
+  .text-estamosHeader {
     position: absolute;
     width: 633px;
     height: 16px;
@@ -339,8 +339,8 @@
 
 <body>
   <header class="d-flex justify-content-center align-items-center messageHeader">
-    <div class="text-header">¡Renovamos nuestro sistema de autenticación!</div>
-    <div class="text-subtitle">Estamos trabajando para brindarte mayor seguridad en tus transacciones y compras con Kueski. <spam><a class="color-text" href="#">Leer más</a></spam></div>
+    <div class="textRenovationHeader">¡Renovamos nuestro sistema de autenticación!</div>
+    <div class="text-estamosHeader">Estamos trabajando para brindarte mayor seguridad en tus transacciones y compras con Kueski. <spam><a class="color-text" href="#">Leer más</a></spam></div>
   </header>
 
   <div class="container login-container">
@@ -382,12 +382,12 @@
         </div>
         <div id="error-message" class="error-alert justify-content-center align-items-center">hola</div>
         <div class="d-flex justify-content-between mt-5">
-          <div id="textColorLogin" class="text-login-user login-text text-center cursor-pointer"
+          <div id="textColorLogin" class="textColorGene2 login-text text-center cursor-pointer"
             onclick="hiddenCreateUser()">
             Iniciar sesión
             <hr class="active-tab" id="tab-login" />
           </div>
-          <div id="textColorCreate" class="text-create-user login-text text-center cursor-pointer"
+          <div id="textColorCreate" class="textColorGene login-text text-center cursor-pointer"
             onclick="hiddenLoginUser()">
             Crear cuenta
             <hr class="tab" id="tab-create" />
@@ -493,11 +493,11 @@
       tabCreate.classList.remove("active-tab")
       tabCreate.classList.add("tab")
       const textColorLogin = document.getElementById('textColorLogin')
-      textColorLogin.classList.add("text-login-user")
-      textColorLogin.classList.remove("text-create-user")
+      textColorLogin.classList.add("textColorGene2")
+      textColorLogin.classList.remove("textColorGene")
       const textColorCreate = document.getElementById('textColorCreate')
-      textColorCreate.classList.remove("text-login-user")
-      textColorCreate.classList.add("text-create-user")
+      textColorCreate.classList.remove("textColorGene2")
+      textColorCreate.classList.add("textColorGene")
       const divErrors = document.getElementById('error-message')
       divErrors.classList.remove("visually-hidden")
     }
@@ -517,43 +517,245 @@
       tabCreate.classList.add("active-tab")
       tabCreate.classList.remove("tab")
       const textColorLogin = document.getElementById('textColorLogin')
-      textColorLogin.classList.remove("text-login-user")
-      textColorLogin.classList.add("text-create-user")
+      textColorLogin.classList.remove("textColorGene2")
+      textColorLogin.classList.add("textColorGene")
       const textColorCreate = document.getElementById('textColorCreate')
-      textColorCreate.classList.add("text-login-user")
-      textColorCreate.classList.remove("text-create-user")
+      textColorCreate.classList.add("textColorGene2")
+      textColorCreate.classList.remove("textColorGene")
     }
 
     window.addEventListener('load', function () {
-      var config = JSON.parse(
-        decodeURIComponent(escape(window.atob('@@config@@')))
-      );
-
-      var leeway = config.internalOptions.leeway;
-      if (leeway) {
-        var convertedLeeway = parseInt(leeway);
-
-        if (!isNaN(convertedLeeway)) {
-          config.internalOptions.leeway = convertedLeeway;
-        }
-      }
-
-      var params = Object.assign({
-        overrides: {
-          __tenant: config.auth0Tenant,
-          __token_issuer: config.authorizationServer.issuer
+      const mockErro = {
+        "original": {
+          "original": null,
+          "response": {
+            "req": {
+              "method": "POST",
+              "url": "https://kueski-development.us.auth0.com/dbconnections/signup",
+              "data": {
+                "client_id": "RQusc7kYBHy5xthHAmwX8ugkfnPN8rlm",
+                "state": "hKFo2SBodkNGanhoOFJzeFh3SGd2blJseEhHTXo5Z091OUQ3T6FupWxvZ2luo3RpZNkgR2cxWXFOSm1lb0xFM1JHSzNnMmZqcnd4SmJQNFVqVnGjY2lk2SBSUXVzYzdrWUJIeTV4dGhIQW13WDh1Z2tmblBOOHJsbQ",
+                "connection": "Username-Password-Authentication",
+                "email": "leovergara.dark@gmail.com",
+                "password": "*****"
+              },
+              "headers": {
+                "content-type": "application/json",
+                "auth0-client": "eyJuYW1lIjoiYXV0aDAuanMiLCJ2ZXJzaW9uIjoiOS4xOC4xIn0="
+              }
+            },
+            "xhr": {},
+            "text": "{\"name\":\"PasswordStrengthError\",\"message\":\"Password is too weak\",\"code\":\"invalid_password\",\"description\":{\"rules\":[{\"message\":\"At least %d characters in length\",\"format\":[8],\"code\":\"lengthAtLeast\",\"verified\":false},{\"message\":\"Contain at least %d of the following %d types of characters:\",\"code\":\"containsAtLeast\",\"format\":[3,4],\"items\":[{\"message\":\"lower case letters (a-z)\",\"code\":\"lowerCase\",\"verified\":false},{\"message\":\"upper case letters (A-Z)\",\"code\":\"upperCase\",\"verified\":false},{\"message\":\"numbers (i.e. 0-9)\",\"code\":\"numbers\",\"verified\":true},{\"message\":\"special characters (e.g. !@#$%^&*)\",\"code\":\"specialCharacters\",\"verified\":false}],\"verified\":false}],\"verified\":false},\"policy\":\"* At least 8 characters in length\\n* Contain at least 3 of the following 4 types of characters:\\n * lower case letters (a-z)\\n * upper case letters (A-Z)\\n * numbers (i.e. 0-9)\\n * special characters (e.g. !@#$%^&*)\",\"statusCode\":400}",
+            "statusText": "",
+            "statusCode": 400,
+            "status": 400,
+            "statusType": 4,
+            "info": false,
+            "ok": false,
+            "redirect": false,
+            "clientError": true,
+            "serverError": false,
+            "error": {
+              "status": 400,
+              "method": "POST",
+              "url": "https://kueski-development.us.auth0.com/dbconnections/signup"
+            },
+            "created": false,
+            "accepted": false,
+            "noContent": false,
+            "badRequest": true,
+            "unauthorized": false,
+            "notAcceptable": false,
+            "forbidden": false,
+            "notFound": false,
+            "unprocessableEntity": false,
+            "headers": {
+              "access-control-allow-credentials": "false",
+              "access-control-allow-origin": "*",
+              "access-control-expose-headers": "X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset",
+              "alt-svc": "h3=\":443\"; ma=86400, h3-29=\":443\"; ma=86400",
+              "cache-control": "private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0, no-transform",
+              "cf-cache-status": "DYNAMIC",
+              "cf-ray": "6f85795d9ba99a47-MEX",
+              "content-length": "929",
+              "content-type": "application/json; charset=utf-8",
+              "date": "Thu, 07 Apr 2022 20:22:13 GMT",
+              "etag": "W/\"3a1-2wJadQ6wZv3grXvf3gGDrtBhGbQ\"",
+              "expect-ct": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+              "ot-baggage-auth0-request-id": "6f85795d9ba99a47",
+              "ot-tracer-sampled": "true",
+              "ot-tracer-spanid": "0fb0b5da7a3dce82",
+              "ot-tracer-traceid": "284dfd97352704f3",
+              "server": "cloudflare",
+              "strict-transport-security": "max-age=31536000",
+              "vary": "Origin, Accept-Encoding",
+              "x-auth0-requestid": "987dcfd2073e17c2b696",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "50",
+              "x-ratelimit-remaining": "49",
+              "x-ratelimit-reset": "1649362935"
+            },
+            "header": {
+              "access-control-allow-credentials": "false",
+              "access-control-allow-origin": "*",
+              "access-control-expose-headers": "X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset",
+              "alt-svc": "h3=\":443\"; ma=86400, h3-29=\":443\"; ma=86400",
+              "cache-control": "private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0, no-transform",
+              "cf-cache-status": "DYNAMIC",
+              "cf-ray": "6f85795d9ba99a47-MEX",
+              "content-length": "929",
+              "content-type": "application/json; charset=utf-8",
+              "date": "Thu, 07 Apr 2022 20:22:13 GMT",
+              "etag": "W/\"3a1-2wJadQ6wZv3grXvf3gGDrtBhGbQ\"",
+              "expect-ct": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+              "ot-baggage-auth0-request-id": "6f85795d9ba99a47",
+              "ot-tracer-sampled": "true",
+              "ot-tracer-spanid": "0fb0b5da7a3dce82",
+              "ot-tracer-traceid": "284dfd97352704f3",
+              "server": "cloudflare",
+              "strict-transport-security": "max-age=31536000",
+              "vary": "Origin, Accept-Encoding",
+              "x-auth0-requestid": "987dcfd2073e17c2b696",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "50",
+              "x-ratelimit-remaining": "49",
+              "x-ratelimit-reset": "1649362935"
+            },
+            "type": "application/json",
+            "charset": "utf-8",
+            "links": {},
+            "body": {
+              "name": "PasswordStrengthError",
+              "message": "Password is too weak",
+              "code": "invalid_password",
+              "description": {
+                "rules": [
+                  {
+                    "message": "At least %d characters in length",
+                    "format": [
+                      8
+                    ],
+                    "code": "lengthAtLeast",
+                    "verified": false
+                  },
+                  {
+                    "message": "Contain at least %d of the following %d types of characters:",
+                    "code": "containsAtLeast",
+                    "format": [
+                      3,
+                      4
+                    ],
+                    "items": [
+                      {
+                        "message": "lower case letters (a-z)",
+                        "code": "lowerCase",
+                        "verified": false
+                      },
+                      {
+                        "message": "upper case letters (A-Z)",
+                        "code": "upperCase",
+                        "verified": false
+                      },
+                      {
+                        "message": "numbers (i.e. 0-9)",
+                        "code": "numbers",
+                        "verified": true
+                      },
+                      {
+                        "message": "special characters (e.g. !@#$%^&*)",
+                        "code": "specialCharacters",
+                        "verified": false
+                      }
+                    ],
+                    "verified": false
+                  }
+                ],
+                "verified": false
+              },
+              "policy": "* At least 8 characters in length\n* Contain at least 3 of the following 4 types of characters:\n * lower case letters (a-z)\n * upper case letters (A-Z)\n * numbers (i.e. 0-9)\n * special characters (e.g. !@#$%^&*)",
+              "statusCode": 400
+            }
+          },
+          "status": 400
         },
-        domain: config.auth0Domain,
-        clientID: config.clientID,
-        redirectUri: config.callbackURL,
-        responseType: 'code'
-      }, config.internalOptions);
+        "statusCode": 400,
+        "code": "invalid_password",
+        "description": {
+          "rules": [
+            {
+              "message": "At least %d characters in length",
+              "format": [
+                8
+              ],
+              "code": "lengthAtLeast",
+              "verified": false
+            },
+            {
+              "message": "Contain at least %d of the following %d types of characters:",
+              "code": "containsAtLeast",
+              "format": [
+                3,
+                4
+              ],
+              "items": [
+                {
+                  "message": "lower case letters (a-z)",
+                  "code": "lowerCase",
+                  "verified": false
+                },
+                {
+                  "message": "upper case letters (A-Z)",
+                  "code": "upperCase",
+                  "verified": false
+                },
+                {
+                  "message": "numbers (i.e. 0-9)",
+                  "code": "numbers",
+                  "verified": true
+                },
+                {
+                  "message": "special characters (e.g. !@#$%^&*)",
+                  "code": "specialCharacters",
+                  "verified": false
+                }
+              ],
+              "verified": false
+            }
+          ],
+          "verified": false
+        },
+        "name": "PasswordStrengthError",
+        "policy": "* At least 8 characters in length\n* Contain at least 3 of the following 4 types of characters:\n * lower case letters (a-z)\n * upper case letters (A-Z)\n * numbers (i.e. 0-9)\n * special characters (e.g. !@#$%^&*)"
+      }
+      //var config = JSON.parse(
+      //  decodeURIComponent(escape(window.atob('@@config@@')))
+      //);
 
-      var webAuth = new auth0.WebAuth(params);
-      var databaseConnection = 'Username-Password-Authentication';
-      var captcha = webAuth.renderCaptcha(
-        document.querySelector('.captcha-container')
-      );
+      //var leeway = config.internalOptions.leeway;
+      //if (leeway) {
+      //  var convertedLeeway = parseInt(leeway);
+
+      //  if (!isNaN(convertedLeeway)) {
+      //    config.internalOptions.leeway = convertedLeeway;
+      //  }
+      //}
+
+      //var params = Object.assign({
+      //  overrides: {
+      //    __tenant: config.auth0Tenant,
+      //    __token_issuer: config.authorizationServer.issuer
+      //  },
+      //  domain: config.auth0Domain,
+      //  clientID: config.clientID,
+      //  redirectUri: config.callbackURL,
+      //  responseType: 'code'
+      //}, config.internalOptions);
+
+      //var webAuth = new auth0.WebAuth(params);
+      //var databaseConnection = 'Username-Password-Authentication';
+      //var captcha = webAuth.renderCaptcha(
+      //  document.querySelector('.captcha-container')
+      //);
 
       function login(e) {
         e.preventDefault();
@@ -576,6 +778,7 @@
         var button = this;
         var email = document.getElementById('email_signup').value;
         var password = document.getElementById('password_signup').value;
+        displayError(mockErro, 'error-message-signup');
         button.disabled = true;
         webAuth.redirect.signupAndLogin({
           connection: databaseConnection,
@@ -597,6 +800,8 @@
       }
 
       function displayError(err, idElement) {
+        console.log(err);
+        //captcha.reload();
         var errorMessage = document.getElementById(idElement);
         console.log(err);
         errorMessage.innerHTML = err.policy || err.description;
