@@ -166,7 +166,7 @@
     cursor: pointer;
   }
 
-  .messageHeader {
+  .message-header {
     height: 70px;
     left: 0px;
     top: 0px;
@@ -335,10 +335,22 @@
       width: 300px;
     }
   }
+
+  @media screen and (max-width: 640px){
+    .message-header{
+      display: none !important;
+    }
+    .text-header{
+      display: none;
+    }
+    .text-subtitle{
+      display: none;
+    }
+  }
 </style>
 
 <body>
-  <header class="d-flex justify-content-center align-items-center messageHeader">
+  <header class="d-flex justify-content-center align-items-center message-header">
     <div class="text-header">¡Renovamos nuestro sistema de autenticación!</div>
     <div class="text-subtitle">Estamos trabajando para brindarte mayor seguridad en tus transacciones y compras con Kueski. <spam><a class="color-text" href="#">Leer más</a></spam></div>
   </header>
