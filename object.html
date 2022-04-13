@@ -26,11 +26,11 @@
     min-height: 500px;
   }
 
-  .textColorGene {
+  .text-create-user {
     color: #656B7C
   }
 
-  .textColorGene2 {
+  .text-login-user {
     color: #18223D;
     font-weight: bold;
   }
@@ -166,14 +166,14 @@
     cursor: pointer;
   }
 
-  .messageHeader {
+  .message-header {
     height: 70px;
     left: 0px;
     top: 0px;
     background: #E5E2FF;
   }
 
-  .textRenovationHeader {
+  .text-header {
     position: absolute;
     width: 330px;
     height: 18px;
@@ -191,7 +191,7 @@
     color: #18223D;
   }
 
-  .text-estamosHeader {
+  .text-subtitle {
     position: absolute;
     width: 633px;
     height: 16px;
@@ -298,6 +298,20 @@
     font-size: 12px;
   }
 
+  #error-message-signup {
+    padding: 20px;
+    border: 1px solid #EBEEF7;
+    box-sizing: border-box;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.06), 0px 1px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    width: 366px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+
+  }
+
   @media screen and (max-width: 640px) {
     .box-sing {
       display: none;
@@ -335,12 +349,24 @@
       width: 300px;
     }
   }
+
+  @media screen and (max-width: 640px){
+    .message-header{
+      display: none !important;
+    }
+    .text-header{
+      display: none;
+    }
+    .text-subtitle{
+      display: none;
+    }
+  }
 </style>
 
 <body>
-  <header class="d-flex justify-content-center align-items-center messageHeader">
-    <div class="textRenovationHeader">¡Renovamos nuestro sistema de autenticación!</div>
-    <div class="text-estamosHeader">Estamos trabajando para brindarte mayor seguridad en tus transacciones y compras con Kueski. <spam><a class="color-text" href="#">Leer más</a></spam></div>
+  <header class="d-flex justify-content-center align-items-center message-header">
+    <div class="text-header">¡Renovamos nuestro sistema de autenticación!</div>
+    <div class="text-subtitle">Estamos trabajando para brindarte mayor seguridad en tus transacciones y compras con Kueski. <spam><a class="color-text" href="#">Leer más</a></spam></div>
   </header>
 
   <div class="container login-container">
@@ -382,12 +408,12 @@
         </div>
         <div id="error-message" class="error-alert justify-content-center align-items-center">hola</div>
         <div class="d-flex justify-content-between mt-5">
-          <div id="textColorLogin" class="textColorGene2 login-text text-center cursor-pointer"
+          <div id="textColorLogin" class="text-login-user login-text text-center cursor-pointer"
             onclick="hiddenCreateUser()">
             Iniciar sesión
             <hr class="active-tab" id="tab-login" />
           </div>
-          <div id="textColorCreate" class="textColorGene login-text text-center cursor-pointer"
+          <div id="textColorCreate" class="text-create-user login-text text-center cursor-pointer"
             onclick="hiddenLoginUser()">
             Crear cuenta
             <hr class="tab" id="tab-create" />
@@ -419,8 +445,10 @@
             <input type="password" class="border-label" required name="password" id="password_signup" placeholder=" " />
             <label for="inputPassword" alt="Tu contraseña" placeholder="Tu contraseña"></label>
           </div>
-          <div id="error-message-signup" class="justify-content-center align-items-center d-flex"></div>
-          <button type="button" class="btn button-login m-3" id="btn-signup">Crear cuenta</button>
+          <div id="error-message-signup" class="d-flex flex-column">
+            <div>Tu contraseña debe contener:</div>
+          </div>
+          <button type="button" class="btn button-login m-3" id="btn-signup" onclick="mockErroClick()">Crear cuenta</button>
           <spam class="text-terminos">Al crear tu cuenta estarás aceptando los <spam href="#"
               class="color-text cursor-pointer">Términos</spam> y el <spam href="#" class="color-text cursor-pointer">
               aviso de privacidad
@@ -493,11 +521,11 @@
       tabCreate.classList.remove("active-tab")
       tabCreate.classList.add("tab")
       const textColorLogin = document.getElementById('textColorLogin')
-      textColorLogin.classList.add("textColorGene2")
-      textColorLogin.classList.remove("textColorGene")
+      textColorLogin.classList.add("text-login-user")
+      textColorLogin.classList.remove("text-create-user")
       const textColorCreate = document.getElementById('textColorCreate')
-      textColorCreate.classList.remove("textColorGene2")
-      textColorCreate.classList.add("textColorGene")
+      textColorCreate.classList.remove("text-login-user")
+      textColorCreate.classList.add("text-create-user")
       const divErrors = document.getElementById('error-message')
       divErrors.classList.remove("visually-hidden")
     }
@@ -517,15 +545,13 @@
       tabCreate.classList.add("active-tab")
       tabCreate.classList.remove("tab")
       const textColorLogin = document.getElementById('textColorLogin')
-      textColorLogin.classList.remove("textColorGene2")
-      textColorLogin.classList.add("textColorGene")
+      textColorLogin.classList.remove("text-login-user")
+      textColorLogin.classList.add("text-create-user")
       const textColorCreate = document.getElementById('textColorCreate')
-      textColorCreate.classList.add("textColorGene2")
-      textColorCreate.classList.remove("textColorGene")
+      textColorCreate.classList.add("text-login-user")
+      textColorCreate.classList.remove("text-create-user")
     }
-
-    window.addEventListener('load', function () {
-      const mockErro = {
+    const mockErro = {
         "original": {
           "original": null,
           "response": {
@@ -727,35 +753,63 @@
         "name": "PasswordStrengthError",
         "policy": "* At least 8 characters in length\n* Contain at least 3 of the following 4 types of characters:\n * lower case letters (a-z)\n * upper case letters (A-Z)\n * numbers (i.e. 0-9)\n * special characters (e.g. !@#$%^&*)"
       }
-      //var config = JSON.parse(
-      //  decodeURIComponent(escape(window.atob('@@config@@')))
-      //);
 
-      //var leeway = config.internalOptions.leeway;
-      //if (leeway) {
-      //  var convertedLeeway = parseInt(leeway);
+    const svgCheckTrue = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="8" fill="#00C853"/><path fill-rule="evenodd" clip-rule="evenodd" d="M11.792 5.17576C12.0562 5.42218 12.0707 5.83616 11.8242 6.10041L7.07337 11.1951C6.77767 11.5122 6.28089 11.5296 5.96378 11.2339L4.20786 9.59646C3.94361 9.35004 3.92915 8.93606 4.17557 8.67181C4.42199 8.40756 4.83597 8.3931 5.10022 8.63952L6.47337 9.92L10.8673 5.20805C11.1137 4.9438 11.5277 4.92934 11.792 5.17576Z" fill="white"/></svg>'
+    const svgCheckFalse = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="8" fill="#B4BACA"/><path fill-rule="evenodd" clip-rule="evenodd" d="M11.792 5.17576C12.0562 5.42218 12.0707 5.83616 11.8242 6.10041L7.07337 11.1951C6.77767 11.5122 6.28089 11.5296 5.96378 11.2339L4.20786 9.59646C3.94361 9.35004 3.92915 8.93606 4.17557 8.67181C4.42199 8.40756 4.83597 8.3931 5.10022 8.63952L6.47337 9.92L10.8673 5.20805C11.1137 4.9438 11.5277 4.92934 11.792 5.17576Z" fill="white"/></svg>'
+    function mockErroClick() {
+      var errorMessage = document.getElementById("error-message-signup");
+      console.log(mockErro);
+      //errorMessage.innerHTML += mockErro.policy || mockErro.description;
+      mockErro.description.rules.forEach(function(rule) {
+        if (rule.verified) {
+          errorMessage.innerHTML += `<div>${svgCheckTrue}<span style="margin-left: 5px">${rule.message}</span></div>`;
+        } else {
+          errorMessage.innerHTML += `<div>${svgCheckFalse}<span style="margin-left: 5px">${rule.message}</span></div>`;
+        }
+        if (rule?.items){
+          rule?.items.forEach(function(item) {
+            if (item.verified) {
+              errorMessage.innerHTML += `<div style="margin-left:16px">${svgCheckTrue}<span style="margin-left: 5px">${item.message}</span></div>`;
+            } else {
+              errorMessage.innerHTML += `<div style="margin-left:16px">${svgCheckFalse}<span style="margin-left: 5px">${item.message}</span></div>`;
+            }
+          })
+        }
+      });
 
-      //  if (!isNaN(convertedLeeway)) {
-      //    config.internalOptions.leeway = convertedLeeway;
-      //  }
-      //}
+      errorMessage.classList.add('d-flex');
+    }
 
-      //var params = Object.assign({
-      //  overrides: {
-      //    __tenant: config.auth0Tenant,
-      //    __token_issuer: config.authorizationServer.issuer
-      //  },
-      //  domain: config.auth0Domain,
-      //  clientID: config.clientID,
-      //  redirectUri: config.callbackURL,
-      //  responseType: 'code'
-      //}, config.internalOptions);
+    window.addEventListener('load', function () {
+      var config = JSON.parse(
+        decodeURIComponent(escape(window.atob('@@config@@')))
+      );
 
-      //var webAuth = new auth0.WebAuth(params);
-      //var databaseConnection = 'Username-Password-Authentication';
-      //var captcha = webAuth.renderCaptcha(
-      //  document.querySelector('.captcha-container')
-      //);
+      var leeway = config.internalOptions.leeway;
+      if (leeway) {
+        var convertedLeeway = parseInt(leeway);
+
+        if (!isNaN(convertedLeeway)) {
+          config.internalOptions.leeway = convertedLeeway;
+        }
+      }
+
+      var params = Object.assign({
+        overrides: {
+          __tenant: config.auth0Tenant,
+          __token_issuer: config.authorizationServer.issuer
+        },
+        domain: config.auth0Domain,
+        clientID: config.clientID,
+        redirectUri: config.callbackURL,
+        responseType: 'code'
+      }, config.internalOptions);
+
+      var webAuth = new auth0.WebAuth(params);
+      var databaseConnection = 'Username-Password-Authentication';
+      var captcha = webAuth.renderCaptcha(
+        document.querySelector('.captcha-container')
+      );
 
       function login(e) {
         e.preventDefault();
@@ -778,7 +832,6 @@
         var button = this;
         var email = document.getElementById('email_signup').value;
         var password = document.getElementById('password_signup').value;
-        displayError(mockErro, 'error-message-signup');
         button.disabled = true;
         webAuth.redirect.signupAndLogin({
           connection: databaseConnection,
@@ -800,11 +853,27 @@
       }
 
       function displayError(err, idElement) {
-        console.log(err);
-        //captcha.reload();
         var errorMessage = document.getElementById(idElement);
         console.log(err);
-        errorMessage.innerHTML = err.policy || err.description;
+        //errorMessage.innerHTML = err.policy || err.description;
+        err.description.rules.forEach(function(rule) {
+        if (rule.verified) {
+          errorMessage.innerHTML += `<div>${svgCheckTrue}<span style="margin-left: 5px">${rule.message}</span></div>`;
+        } else {
+          errorMessage.innerHTML += `<div>${svgCheckFalse}<span style="margin-left: 5px">${rule.message}</span></div>`;
+        }
+        if (rule?.items){
+          rule?.items.forEach(function(item) {
+            if (item.verified) {
+              errorMessage.innerHTML += `<div style="margin-left:16px">${svgCheckTrue}<span style="margin-left: 5px">${item.message}</span></div>`;
+            } else {
+              errorMessage.innerHTML += `<div style="margin-left:16px">${svgCheckFalse}<span style="margin-left: 5px">${item.message}</span></div>`;
+            }
+          })
+        }
+      });
+
+      errorMessage.classList.add('d-flex');
         errorMessage.classList.add('d-flex');
       }
 
