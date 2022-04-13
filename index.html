@@ -298,6 +298,20 @@
     font-size: 12px;
   }
 
+  #error-message-signup {
+    padding: 20px;
+    border: 1px solid #EBEEF7;
+    box-sizing: border-box;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.06), 0px 1px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    width: 366px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+
+  }
+
   @media screen and (max-width: 640px) {
     .box-sing {
       display: none;
@@ -431,7 +445,8 @@
             <input type="password" class="border-label" required name="password" id="password_signup" placeholder=" " />
             <label for="inputPassword" alt="Tu contraseña" placeholder="Tu contraseña"></label>
           </div>
-          <div id="error-message-signup" class="justify-content-center align-items-center d-flex"></div>
+          <div id="error-message-signup" class="d-flex flex-column visually-hidden">
+          </div>
           <button type="button" class="btn button-login m-3" id="btn-signup">Crear cuenta</button>
           <spam class="text-terminos">Al crear tu cuenta estarás aceptando los <spam href="#"
               class="color-text cursor-pointer">Términos</spam> y el <spam href="#" class="color-text cursor-pointer">
@@ -516,8 +531,6 @@
     function hiddenLoginUser() {
       const divErrors = document.getElementById('error-message')
       divErrors.classList.add("visually-hidden")
-      const divErrorsSign = document.getElementById('error-message-signup')
-      divErrorsSign.classList.remove("visually-hidden")
       const divUserLogin = document.getElementById('userLogin');
       divUserLogin.classList.add("visually-hidden")
       const divUserCreate = document.getElementById('userCreate')
@@ -535,7 +548,6 @@
       textColorCreate.classList.add("text-login-user")
       textColorCreate.classList.remove("text-create-user")
     }
-
     window.addEventListener('load', function () {
       var config = JSON.parse(
         decodeURIComponent(escape(window.atob('@@config@@')))
@@ -608,10 +620,33 @@
         });
       }
 
+      const svgCheckTrue = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="8" fill="#00C853"/><path fill-rule="evenodd" clip-rule="evenodd" d="M11.792 5.17576C12.0562 5.42218 12.0707 5.83616 11.8242 6.10041L7.07337 11.1951C6.77767 11.5122 6.28089 11.5296 5.96378 11.2339L4.20786 9.59646C3.94361 9.35004 3.92915 8.93606 4.17557 8.67181C4.42199 8.40756 4.83597 8.3931 5.10022 8.63952L6.47337 9.92L10.8673 5.20805C11.1137 4.9438 11.5277 4.92934 11.792 5.17576Z" fill="white"/></svg>'
+      const svgCheckFalse = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="8" fill="#B4BACA"/><path fill-rule="evenodd" clip-rule="evenodd" d="M11.792 5.17576C12.0562 5.42218 12.0707 5.83616 11.8242 6.10041L7.07337 11.1951C6.77767 11.5122 6.28089 11.5296 5.96378 11.2339L4.20786 9.59646C3.94361 9.35004 3.92915 8.93606 4.17557 8.67181C4.42199 8.40756 4.83597 8.3931 5.10022 8.63952L6.47337 9.92L10.8673 5.20805C11.1137 4.9438 11.5277 4.92934 11.792 5.17576Z" fill="white"/></svg>'
       function displayError(err, idElement) {
+        captcha.reload();
         var errorMessage = document.getElementById(idElement);
+        errorMessage.classList.remove("visually-hidden")
         console.log(err);
-        errorMessage.innerHTML = err.policy || err.description;
+        //errorMessage.innerHTML = err.policy || err.description;
+        errorMessage.innerHTML = "<div>Tu contraseña debe contener:</div>";
+        err.description.rules.forEach(function(rule) {
+        if (rule.verified) {
+          errorMessage.innerHTML += `<div>${svgCheckTrue}<span style="margin-left: 5px">${rule.message}</span></div>`;
+        } else {
+          errorMessage.innerHTML += `<div>${svgCheckFalse}<span style="margin-left: 5px">${rule.message}</span></div>`;
+        }
+        if (rule?.items){
+          rule?.items.forEach(function(item) {
+            if (item.verified) {
+              errorMessage.innerHTML += `<div style="margin-left:16px">${svgCheckTrue}<span style="margin-left: 5px">${item.message}</span></div>`;
+            } else {
+              errorMessage.innerHTML += `<div style="margin-left:16px">${svgCheckFalse}<span style="margin-left: 5px">${item.message}</span></div>`;
+            }
+          })
+        }
+      });
+
+      errorMessage.classList.add('d-flex');
         errorMessage.classList.add('d-flex');
       }
 
